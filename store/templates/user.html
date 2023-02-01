@@ -1,0 +1,97 @@
+{% extends 'base_template.html' %}
+
+{% block title %}My Account {% endblock %}  
+
+
+{% block body %}
+{% include 'header.html' %}
+
+        {% if loginStatus %}
+        <div class="container mb-5 mt-4 ">
+                <h4 class="text-end mt-2 "><a href="{% url 'store:logout' %}" class="text-decoration-none"> <i class="bi bi-box-arrow-left"></i> Logout</a></h4>
+                <div class="row">
+                        <div class="col-sm-3" style="max-height: 15rem;">
+                                <img src="{{MEDIA_ROOT}}{{user.profileImage.url}}" alt="" class="img-fluid rounded rounded-circle mx-auto border border-dark d-block" style="height:100%;width:90%;">
+                        </div>
+                        <div class="col-sm-9 fs-5 " style="min-height: 30rem;">
+                                <h1 class="h1 mb-3 mt-5">Your Account Info : </h1>
+                                <form action="{% url 'store:update' %}" method="post">
+                                        {% csrf_token %}
+                                
+                                <div class="row mt-5">
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                        <label for="fname">First name</label>
+                                                        <input type="text" name="fname" id="fname" value={{user.firstname}} class="form-control">
+                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                        <label for="fname">Last name</label>
+                                                        <input type="text" name="lname" id="lname" value="{{user.lastname}}" class="form-control">
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="row mt-3">
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                        <label for="email">Email : </label>
+                                                        <input type="email" name="email" id="email" value="{{user.email}}" class="form-control">
+                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                        <label for="phno">Phone number : </label>
+                                                        <input type="text" name="phno" id="phno" value="{{user.phone}}" class="form-control" maxlength="10">
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="row mt-3">
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                        <label for="pass">Password : </label>
+                                                        <input type="password" name="pass" id="pass" value="{{user.password}}" class="form-control">
+                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                        <label for="pin">Pincode : </label>
+                                                        <input type="text" name="pin" id="pin" value="{{user.pincode}}" class="form-control" maxlength="6" >
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="row my-3">
+                                        <div class="col-md-12">
+                                                <label for="shipping">Shipping Address : </label>
+                                                <textarea name="shipping" id="shipping" cols="30" rows="4" class="form-control" >{{user.shippingAddress}}</textarea>
+                                        </div>
+                                </div>
+                                <input type="submit"  class="float-end btn btn-primary fs-5" value="Save Changes"></input>
+                        </form>
+                                <button class="float-end fs-5 me-3 btn btn-outline-primary" onClick={window.location.reload()} >Discard Changes</button> 
+                                
+                        </div>
+                </div>
+               </div>
+        {% else %}
+
+<div class="container mx-auto  pt-4 pb-3 fs-3 shadow rounded d-flex flex-column align-items-center mt-5 text-light bg-primary" style="max-width: 500px;">
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+    <h1 class="text-center fs-1">Login</h1>
+    <h4 class="text-danger bg-light text-center mt-3">{{msg}}</h4>
+    <div class="form-group">
+        <label for="email" class="form-label">Email : </label>
+        <input type="email" name="email" id="" class="form-control" placeholder="Email address"> 
+    </div>
+    <div class="form-group mt-3">
+        <label for="password" class="form-label">Password :- </label>
+        <input type="password" name="password" class="form-control" placeholder="Password here">
+    </div>
+    <input type="submit" value="Login" class="btn btn-light mt-4 fs-4 d-block mx-auto w-25 mb-2"> <a href="#" class="text-light text-center">Dont' have an account? Create one</a>
+</form>
+</div>
+        {% endif %}
+
+{% endblock %}

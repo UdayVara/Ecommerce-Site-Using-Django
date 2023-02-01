@@ -1,0 +1,54 @@
+
+
+
+  <nav class="navbar navbar-expand-lg bg-light shadow sticky-top" style="font-size: 1.1rem;">
+    <div class="container-fluid"> 
+      <a class="navbar-brand" href="{% url 'store:home' %}"><i class="bi bi-bag text-primary fs-5"></i> MobShop</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active mx-2 " aria-current="page" href="{% url 'store:home' %}"><i class="bi bi-house text-primary"></i> Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <div class="btn-group ">
+              <a href="{% url 'store:brands' %}" class="btn " style="font-size: 1.1rem;"> <i class="bi bi-phone text-primary"></i> Brands</a>
+              <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 1.1rem;">
+                <span class="visually-hidden">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'store:brandproducts' 'oppo' %}">Oppo</a></li>
+                <li><a class="dropdown-item" href="{% url 'store:brandproducts' 'samsung' %}">Samsung</a></li>
+                <li><a class="dropdown-item" href="{% url 'store:brandproducts' 'apple' %}">Apple</a></li>
+                <li><a class="dropdown-item" href="{% url 'store:brandproducts' 'oneplus' %}">Oneplus</a></li>
+                <li><a class="dropdown-item" href="{% url 'store:brandproducts' 'realme' %}">Realme</a></li>
+              </ul>
+            </div>
+            {% comment %} <a class="nav-link active dropdown-toggle" href="{% url 'store:products' %}" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-phone text-primary"></i> Brands
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'store:products' %}">Oppo</a></li>
+              <li><a class="dropdown-item" href="{% url 'store:products' %}">Samsung</a></li>
+              <li><a class="dropdown-item" href="{% url 'store:products' %}">Apple</a></li>
+              <li><a class="dropdown-item" href="{% url 'store:products' %}">Onplus</a></li>
+              <li><a class="dropdown-item" href="{% url 'store:products' %}">Realme</a></li>
+            </ul> {% endcomment %}
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active  mx-2 " href="{% url 'store:cart' %}"><i class="bi bi-cart text-primary"></i> Cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active mx-2 " href="{% url 'store:user' %}"><i class="bi bi-person-square text-primary me-1"></i> Account</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+
+  <!-- Example split danger button -->

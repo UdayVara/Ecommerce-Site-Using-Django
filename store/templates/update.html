@@ -1,0 +1,20 @@
+{% extends 'base_template.html' %}
+
+{% block title %} My Cart {% endblock %}  
+
+
+{% block body %}
+{% include 'header.html' %}
+
+<div class="container mx-auto mt-5" style="max-width:450px ;">
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="otp" class="form-label mb-1 fs-5">Enter 6 digit OTP send to your Email Address : </label>
+        <input type="text" name="otpno" id="otp" class="fs-5 form-control my-3" placeholder="Enter here ">
+        <input type="submit" value="Update" class=" fs-5 btn btn-warning w-100 mt-2">
+    </form>
+    
+</div>
+
+        
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base_template.html' %}
+{% load mathfilters %}
+{% block title %} {{brand|capfirst}} - Products {% endblock %}  
+
+
+{% block body %}
+{% include 'header.html' %}
+
+        <h1 class="text-center text-dark mt-4">{{brand.brandName|capfirst}} Smartphones</h1>
+
+        
+        
+        
+        <div class="container my-5">
+                <div class="row row-cols-1 row-cols-md-2 g-4 mt-md-0 mt-4">
+                        {% for item in product %}
+                        <div class="col">
+                                        <div class="card mb-3 shadow" >
+                                                <div class="row g-3">
+                                                  <div class="col-md-4 ps-sm-5 ps-0 " >
+                                                    <img src="{{MEDIA_ROOT}}{{item.productimage.url}}" class="img-fluid rounded-start mt-3 ms-sm-5 ms-md-0 ms-2 d-block" alt="...">
+                                                  </div>
+                                                  <div class="col-md-8">
+                                                    <div class="card-body">
+                                                      <h2 class="card-title fs-md-2 fs-4
+                                                        mb-2">{{item.productName|capfirst}}</h2>
+                                                      <h2 class="card-title fs-5  mt-2">Colour :- {{item.color}}</h2>
+                                                      <h2 class="card-title fs-5">Storage :- {{item.variant.variantName}}</h2>
+                              <p class="card-text">{{item.specs|slice:":50"}} ...</p>
+                              <h3 class="card-text fs-5">Price :- {% widthratio item.mrp 100 100|sub:item.discount %}</h3>
+                              <big class="mt-0 fs-4 text-success"> {{item.discount}} % </big><strike class="text-muted">  {{item.mrp}}</strike>
+                              <a href={% url 'store:individualproducts' item.brand.brandName item.productName item.color %} class="btn btn-outline-primary d-block mt-2 w-50" target="_blank">View full details</a>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                        </div>
+                                        {% empty %}
+                                        </div>
+                                                  <h4 class="text-center mt-3 mx-2">Sorry , currently there are no Smartphones available from  {{brand.brandName}} </h4>
+                                        {% endfor %}
+                </div>
+        </div>
+        
+        
+{% include 'footer.html' %}
+{% endblock %}
+
+

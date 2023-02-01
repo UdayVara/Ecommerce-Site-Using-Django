@@ -1,0 +1,78 @@
+{% extends 'base_template.html' %}
+{% load mathfilters %}
+{% block title %} My Cart {% endblock %}  
+
+
+{% block body %}
+{% include 'header.html' %}
+        
+        <div class="container my-5">
+          {% if isLoggedIn %}
+
+          
+                {% if isEmpty %}
+                  <h1 class="text-center my-5">Your cart is empty</h1>
+                  <a href="{% url 'store:home' %}" class="btn btn-lg btn-primary mt-1 mx-auto d-block w-25 mb-5">Shop now</a>
+                {% else %}
+                
+                <div class="container-lg mt-5">
+                  <h2 class="text-start my-3">Cart Items : </h2>
+                        {% for product in products %}
+                        
+                        <div class="card mb-3 w-100">
+                                <div class="row g-0">
+                                  <div class="col-md-4 justify-content-center" style="max-height:16rem;">
+                                    <img src="{{MEDIA_ROOT}}{{product.item.productimage.url}}" class="img-fluid rounded-start d-block mx-auto my-2" alt="..."  style="max-height:14rem;">
+                                  </div>
+                                  <div class="col-md-8">
+                                    <div class="card-body">
+                                      <h2 class="card-title">{{product.item.productName}} ({{product.item.variant.variantName}}) <span class="fs-4">{{product.item.color}}</span></h2>
+                                      <p class="card-text">{{product.item.specs|slice:":150" }} ...</p>
+                                      <h3 class="card-text fs-5">Price :- {% widthratio product.item.mrp 100 100|sub:product.item.discount %} <span class=" ms-2 text-success">{{product.item.discount}} %</span> <strike class="text-muted">{{product.item.mrp}}</strike></h3>
+                                      <a href=" {% url 'store:delcart' product.item.id %}"  class="btn btn-danger mt-2"><i class="bi bi-trash3 me-2"></i> Remove item</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        {% endfor %}
+
+                        <div class="container-fluid mt-5 shadow py-3 border border-1 border-primary rounded">
+                          <div class="row">
+                            <div class="col-6">
+                              <h4 class="text-start ms-2">Price : </h4>
+                            </div>
+                            <div class="col-6">
+                              <h4 class="text-end me-2">{{totalMrp}} </h4>
+                            </div>
+                          </div>
+                          <div class="row my-2">
+                            <div class="col-6">
+                              <h4 class="text-start ms-2">Discounted amount : </h4>
+                            </div>
+                            <div class="col-6">
+                              <h4 class="text-end me-2 text-success"> - {{totalDiscount}} </h4>
+                            </div>
+                          </div>
+                          <hr class="text-primary">
+                          <div class="row mt-4">
+                            <div class="col-8">
+                              <h4 class="text-start ms-2">Amount to be paid : </h4>
+                            </div>
+                            <div class="col-4">
+                              <h4 class="text-end me-2">{{finalAmount}}</h4>
+                            </div>
+                          </div>
+                      </div>
+                      <button class="btn btn-primary w-100 fs-3 mt-4 rounded rounded-pill">Proceed to Checkout</button>
+                </div>
+                {% endif %}
+          {% else %}
+
+          <h1 class="text-center">You are not logged in to your account</h1>
+          <a href="{% url 'store:user' %}" class="btn btn-primary btn-lg my-5 d-block mx-auto w-25">Login Now</a>
+          {% endif %}
+        </div>
+
+        {% include 'footer.html' %}
+{% endblock %}
+

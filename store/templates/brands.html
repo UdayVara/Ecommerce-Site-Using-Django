@@ -1,0 +1,30 @@
+{% extends 'base_template.html' %}
+
+{% block title %} Brands {% endblock %}  
+
+{% load static %}
+{% block body %}
+{% include 'header.html' %}
+
+{% for item in brands  %}
+    <div class="cotainter bg-{{item.brandSecondaryColour}} text-{{item.brandPrimeColour}} " style="min-height:32rem;">
+            <div class="row pt-4 gx-0">
+                <div class="ms-md-3 ms-2 col-md-2 ">
+                        <p style="font-size:4.5rem ;">{{item.brandName|capfirst}} </p>
+                </div>
+                <div class=" col-md-3 mt-2 offset-md-6 d-md-block d-none" style="max-height: 10rem;">
+                    <img src="{{MEDIA_ROOT}}{{item.brandImage.url}}" alt="" class="img-fluid rounded  shadow shadow-{{item.brandPrimeColour}} " style="max-height: 10rem;min-width: 18rem;">
+                </div>  
+            </div>
+
+            <h3 class=" mt-4 ms-3">About {{item.brandName}} :- </h3>  
+            <h5 class=" ms-3 mt-3 me-md-1">{{item.brandDescription}}</h5>
+            
+            <a href={% url 'store:brandproducts' item.brandName %}  class="ms-3 my-5 btn btn-outline-{{item.brandPrimeColour}} fs-5">View products </a>
+    </div>
+    {% empty %}
+                    <h1 class="text-center my-5">Sorry , something went wrong</h1>
+    {% endfor %}
+
+    {% include 'footer.html' %}   
+{% endblock %}
